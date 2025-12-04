@@ -29,15 +29,11 @@
     <h2>Abstract</h2>
     
     <p style="text-align: left;">
-        Rendering produces 2D images from 3D scene representations, yet how continuous variations in camera pose and scenes influence these images—and, consequently, downstream visual models—remains underexplored. We introduce <strong>Abstract Rendering</strong>, a framework that computes provable bounds on all images rendered under continuously varying camera poses and scenes. The resulting abstract image, expressed as a set of constraints over the image matrix, enables rigorous uncertainty propagation through downstream neural networks and thereby supports certification of model behavior under realistic 3D semantic perturbations, far beyond traditional pixel-level noise models.
+        Rendering maps 3D scenes to 2D images, yet how continuous changes in camera pose or scene geometry influence these images—and downstream vision models—remains unexplored. We introduce <strong>Abstract Rendering</strong>, which computes <em>provable bounds</em> on all images produced under such 3D variations. These <strong>abstract images</strong> can be propagated through neural networks to certify model behavior under realistic semantic changes, far beyond traditional pixel-level noise models.
     </p><br>
 
     <p style="text-align: left;">
-        Our approach propagates camera pose uncertainty through each rendering step using efficient piecewise linear bounds, including custom abstractions for three rendering-specific operations—matrix inversion, sorting-based aggregation, and cumulative product summation—not supported by standard tools. Our implementation, <strong>ABSTRACTRENDER</strong>, targets two state-of-the-art photorealistic scene representations—3D Gaussian Splats and Neural Radiance Fields (NeRF)—and scales to complex scenes with up to 1M Gaussians.
-    </p><br>
-
-    <p style="text-align: left;">
-        Our computed abstract images achieve up to <strong>3% over-approximation error</strong> compared to sampling results (baseline). Through experiments on classification (ResNet), object detection (YOLO), and pose estimation (GATENet) tasks, we demonstrate that abstract rendering enables formal certification of downstream models under realistic 3D variations—an essential step toward safety-critical vision systems.
+        Our approach introduces new piecewise-linear abstractions for key rendering operations and supports modern scene representations, including 3D Gaussian Splatting and NeRF. Experiments on classification (ResNet), object detection (YOLO), and pose estimation (GATENet) show that our abstract images provide guaranteed over-approximations with no more than 3% conservativeness error, enabling practical certification for safety-critical vision systems.
     </p><br><br>
 
     <h2>SlideVideo</h2>
