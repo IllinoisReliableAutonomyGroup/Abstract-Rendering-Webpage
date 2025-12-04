@@ -13,7 +13,7 @@
     <h1>Abstract Rendering: Certified Rendering Under 3D
         Semantic Uncertainty</h1>
     <p class="spotlight">NeurIPS 2025 spotlight</p>
-    <h3 class="author">Chenxi Ji<sup>*</sup>, Yangge Li<sup>*</sup>, Xiangru Zhong<sup>*</sup>, Huan Zhang, Sayan Mitra</h3>
+    <h3 class="author">Chenxi Ji<sup>*</sup>, Yangge Li<sup>*</sup>, Xiangru Zhong<sup>*</sup>, Huan Zhang, <a href="https://mitras.ece.illinois.edu/">Sayan Mitra</a></h3>
     <h4 class="institute">University of Illinois, Urbana-Champaign</h4>
 
 
@@ -28,27 +28,22 @@
 
     <h2>Abstract</h2>
     
-    <p style="text-align: left;">
-        Rendering maps 3D scenes to 2D images, yet how continuous changes in camera pose or scene geometry influence these images—and downstream vision models—remains unexplored. We introduce <strong>Abstract Rendering</strong>, which computes <em>provable bounds</em> on all images produced under such 3D variations. These <strong>abstract images</strong> can be propagated through neural networks to certify model behavior under realistic semantic changes, far beyond traditional pixel-level noise models.
+    <p style="text-align: justify">
+        Rendering generates a two-dimensional image from the description of a three-dimensional scene and the camera parameters. To analyze how <em></em>visual models</em>, such as classifiers and pose estimators, and controllers behave with respect to changes in the scene or in the camera parameters, we need to propagate those changes through the rendering process. 
+        This is the problems of  <strong>Abstract Rendering</strong> introduces and tackled in this paper. Abstract rendering computes  <em>provable pixel color bounds</em> on all images that can be produced under variations in the scene and in the camera positions. The resulting sets of images are called <strong>abstract images</strong> which can then be propagated through neural networks verification tools such as <a href="https://github.com/Verified-Intelligence/alpha-beta-CROWN">CROWN</a> to certify visual models under realistic semantic perturbations. For example, we can certify that a ResNet classifier will continue to detect and classify an airplane or a car correctly as the camera moves within a certain range of positions. 
     </p><br>
 
-    <p style="text-align: left;">
-        Our approach introduces new piecewise-linear abstractions for key rendering operations and supports modern scene representations, including 3D Gaussian Splatting and NeRF. Experiments on classification (ResNet), object detection (YOLO), and pose estimation (GATENet) show that our abstract images provide guaranteed over-approximations with no more than 3% conservativeness error, enabling practical certification for safety-critical vision systems.
+    <p style="text-align: justify">
+        In this peper, we present an abstract rendering framework for scenes represeted by <em><a href="https://en.wikipedia.org/wiki/Gaussian_splatting">Gaussian splats</a> (3DGS)</em> and <em><a href="https://en.wikipedia.org/wiki/Neural_radiance_field">NeRFs</a></em>. Our approach is based on computing piecewise-linear relational abstractions for each of the operations appearing in the standard rendering algorithms for 3DGS and NeRFs. By composing these relational abstractions, we get the abstract rendering algorithms that can compute pixel color bounds or abstract images. Experiments on classification (ResNet), object detection (YOLO), and pose estimation (GateNet) show that our abstract images provide guaranteed over-approximations with no more than 3% conservativeness error, enabling practical certification for safety-critical vision systems.
     </p><br><br>
 
-    <h2>SlideVideo</h2>
-    <br>
-    <div class="slidevideo-container">
-        <video class="wide-video" controls>
-            <source src="assets/videos/output_small.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    <br><br>
+   
 
     <h2>Abstract Images</h2>
   
-    <p style="text-align: left;">Lower bound and upper bound images are supposed to contain all images that can be rendered from given range of camera (scene) movement, such as the reference images.</p>
+    <p style="text-align: justify;">
+        An abstract image is a continuous range of images and it can also be seen as a matrix with a range (or interval) of possible colors for each pixel. Here we visualize abstract images by the lower and upper-bound of the pixel colors, that arise from all possible changes in the scene or camera.  The camera-pose slider fixes a specific camera position within the scene, while the perturbation-range slider adjusts the extent of camera movement around that position. The reference image represents the rendering from the exact camera pose without any perturbation. Soundness of abstract rendering ensures that the abstract image, represented by the lower and upper bound images, contrains all the possible renderings from the specified range of camera movements.
+    </p>
   </div>
     <div class="interactive-windows">
         <iframe src="render_static.html" class="interactive-frame"></iframe>
@@ -60,37 +55,50 @@
     <img src="assets/images/abs_result.png" class="teaser" alt="Teaser Image" style="width: 100%;"><br>
     <br>-->
 
-    <h2>Downstream NN Verification</h2>
+    <h2>Visual Model Verification with Abstract Rendering</h2>
     
-    <p style="text-align: left;">Verify the range of camera movement for which the downstream NN (ResNet classifer or GateNet pose estimator) is certified to work (color in green), and identify the ranges where it may fail (color in red).</p>
+    <p style="text-align: justify;">
+        Abstract rendering can be used to certify the robustness of visual models under 3D semantic uncertainty. For example, we can certify that a ResNet classifier will continue to detect and classify an object correctly as the camera moves around it. More realistically, we can identify the range of camera view angles for which the classifier correctly classifies the object (shown in green) and the range where the classification may be incorrect (shown in red).  Similar analysis is performed for pose estimation models such as GateNet.
+    </p>
 
     <img src="assets/images/classification result.png" class="teaser" alt="Teaser Image" style="width: 100%;">
     <img src="assets/images/pose estimator result.png" class="teaser" alt="Teaser Image" style="width: 100%;">
     <br><br>
 
-    <h2>BibTeX</h2>
-    
+     <h2>Video Overview</h2>
+    <br>
+    <div class="slidevideo-container">
+        <video class="wide-video" controls>
+            <source src="assets/videos/output_small.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <br><br>
+
+    <p style="text-align: justify;">
+        More details can be found in the paper. Cite this work as:
+    </p>
     <pre style="text-align: left;">
-@inproceedings{jiabstract,
+    
+@inproceedings{AbstractRendering_Neurips2025,
     title={Abstract Rendering: Certified Rendering Under 3D Semantic Uncertainty},
     author={Ji, Chenxi and Li, Yangge and Zhong, Xiangru and Zhang, Huan and Mitra, Sayan},
-    booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems}
+    booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
+    year={2025},
+    month={December},
+    address={San Diego, CA, USA}
 }
     </pre>
     <br><br>
 
-    <h2>Acknowledgments and Funding</h2>
+    <h2>Acknowledgments</h2>
     
-    <p style="text-align: left;">
+    <p style="text-align: justify;">
         Chenxi Ji, Yangge Li, and Sayan Mitra are supported by a research grant from The Boeing Company and NSF (FMITF-2525287). Huan Zhang and Xiangru Zhong are supported in part by the AI2050 program at Schmidt Sciences (AI2050 Early Career Fellowship) and NSF (IIS SLES-2331967, CCF FMITF-2525287).
-    </p>
-    <br>
-
-    <p style="text-align: left">
         We thank Douglas Belgorod and Maya Cheshire for researching and developing applications of Abstract Rendering.</p>
     <br><br>
 
-    <h2>Reference</h2>
+    <!-- <h2>Reference</h2>
     
     <p style="text-align: left;">
         [1] Bernhard Kerbl, Georgios Kopanas, Thomas Leimkühler, and George Drettakis. 3d gaussian splatting for real-time radiance field rendering. <i>ACM Trans. Graph.</i>, 42(4):139–1, 2023.
@@ -100,7 +108,7 @@
     </p><br>
     <p style="text-align: left;">
         [3] Huan Zhang, Tsui-Wei Weng, Pin-Yu Chen, Cho-Jui Hsieh, and Luca Daniel. Efficient neural network robustness certification with general activation functions. <i>Advances in neural information processing systems</i>, 31, 2018.
-    </p><br>
+    </p><br> -->
 
   </div>
 
